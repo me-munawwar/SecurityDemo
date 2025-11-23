@@ -14,12 +14,22 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A custom authentication provider that authenticates users against the database.
+ */
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     private final CustomUserSevice userService;
 
+    /**
+     * Authenticates the user.
+     *
+     * @param authentication The authentication request object.
+     * @return An authenticated {@link Authentication} object.
+     * @throws AuthenticationException If authentication fails.
+     */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
@@ -40,6 +50,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         throw new RuntimeException("User could not be found");
     }
 
+    /**
+     * Returns true if this {@link AuthenticationProvider} supports the indicated
+     * {@link Authentication} object.
+     *
+     * @param authenticationType The type of authentication object.
+     * @return True if the provider supports the authentication type, false otherwise.
+     */
     @Override
     public boolean supports(Class<?> authenticationType) {
         return authenticationType.equals(UsernamePasswordAuthenticationToken.class);

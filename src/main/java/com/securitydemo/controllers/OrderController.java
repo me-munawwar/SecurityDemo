@@ -9,10 +9,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Controller for order-related operations.
+ */
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
 
+    /**
+     * Creates a new order.
+     *
+     * @param body The details of the order.
+     * @return A map containing the order ID, details, and a success message.
+     */
     @PostMapping("/create")
     public Map<String, Object> createOrder(@RequestBody Map<String, Object> body) {
         Map<String, Object> response = new HashMap<>();
